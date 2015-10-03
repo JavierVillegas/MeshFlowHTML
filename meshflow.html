@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Meshflow</title>
+<!-- <link type="text/css" rel="stylesheet" href="calendarCanvas.css"> -->
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute  vec4 vPosition;
+attribute  vec2 vTexCoord;
+varying vec2 fTexCoord;
+void
+main()
+{
+    
+    gl_Position.x = vPosition.x;
+    gl_Position.y = vPosition.y;
+    gl_Position.z = 0.0;
+    gl_Position.w = 1.0;
+    fTexCoord = vTexCoord;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+
+varying  vec2 fTexCoord;
+uniform sampler2D texture;
+uniform sampler2D Calendar;
+void main()
+{
+  vec4 readColor = texture2D( texture, fTexCoord );
+ 
+  gl_FragColor = readColor;//vec4( 1.0, 0.0, 0.0, 1.0 );//;
+    //  }
+
+   // gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );
+}
+</script>
+
+<!-- <script type="text/javascript" src="Common/webgl-utils.js"></script>
+<script type="text/javascript" src="Common/initShaders.js"></script>
+<script type="text/javascript" src="Common/MV.js"></script>
+<script type="text/javascript" src="MeshFlow.js"></script> -->
+</head>
+
+
+
+<body>
+  <video autoplay></video>
+  <canvas id='canvas' width='300' height='250'></canvas>
+
+<!--  <script language='javascript'> 
+// document.getElementById('capture').onclick = function() { 
+//     var video = document.querySelector('video'); 
+//     var canvas = document.getElementById('canvas');
+//   var ctx = canvas.getContext('2d'); 
+//   ctx.drawImage(video,0,0,300,250);
+  
+//   var data = ctx.getImageData(0,0,canvas.width,canvas.height);   
+// } 
+// </script>  -->
+  <script src="webcam.js"></script>
+
+<canvas id="gl-canvas" width="640" height="480">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+</html>
+
+<!-- window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+      
+      var video = document.createElement( 'video' );
+      video.autoplay = true;
+      
+      video.addEventListener( 'loadedmetadata', function ( event ) {
+        video.style.width = video.videoWidth + 'px';
+        video.style.height = video.videoHeight + 'px';
+        init();
+      } );
+
+      navigator.getUserMedia( { video: true }, function ( stream ) {
+        video.src = window.URL.createObjectURL( stream );
+      }, function ( error ) {
+        console.log( error );
+      } );
+       -->
